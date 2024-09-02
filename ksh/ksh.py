@@ -6,8 +6,8 @@ screen_width = 480
 screen_height = 640
 
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("ksn")
-background = pygame.image.load("C:\\Users\\ncc8\\Desktop\\ncc\\ncc-1\\background.png")
+pygame.display.set_caption("KSN")
+background = pygame.image.load(r"ksh\background.png")
 
 running = True
 while running:
