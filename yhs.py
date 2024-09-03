@@ -18,7 +18,7 @@ pygame.display.set_caption('응애')
 
 # 현재 파일의 디렉토리 기준으로 경로 설정(by ChatGPT)
 current_dir=os.path.dirname(__file__)
-image_dir=os.path.join(current_dir,"image_yhs")
+image_dir=os.path.join(current_dir,'image_yhs')
 
 # 배경 설정
 background=pygame.image.load(os.path.join(image_dir,'background.png'))
@@ -45,6 +45,9 @@ char_speed=0.75
 # 이동 변수 초기화
 to_x=0
 to_y=0
+
+# 폰트 정의
+font=pygame.font.Font(None,40)
 
 # 게임 켜지면 실행할 놈들
 running=True
@@ -94,12 +97,21 @@ while running:
     elif char_y_pos>screen_height-char_height:
         char_y_pos=screen_height-char_height
 
-    # 충돌 처리
+    # rect 업데이트
     char_rect=character.get_rect()
     char_rect.left=char_x_pos
     char_rect.top=char_y_pos
 
-    # 배경이랑 캐릭터 위치
+    enemy_rect=enemy.get_rect()
+    enemy_rect.left=enemy_x_pos
+    enemy_rect.top=enemy_y_pos
+
+    # 충돌 감지
+    if char_rect.colliderect(enemy_rect):
+        print('으앙 쥬금 ㅠ')
+        running=False
+
+    # 애들 위치
     screen.blit(background,(0,0))
     screen.blit(character,(char_x_pos,char_y_pos))
     screen.blit(enemy,(enemy_x_pos,enemy_y_pos))
