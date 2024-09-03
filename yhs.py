@@ -3,6 +3,7 @@ import os
 
 # 초기화
 pygame.init()
+os.system('cls')
 
 # 스크린 설정
 screen_width=480
