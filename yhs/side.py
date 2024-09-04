@@ -15,7 +15,7 @@ clock=pygame.time.Clock()
 # 제목 설정
 pygame.display.set_caption('응애')
 
-# 현재 파일의 디렉토리 기준으로 경로 설정(by ChatGPT)
+# 현재 파일의 디렉토리 기준으로 경로 설정
 current_dir=os.path.dirname(__file__)
 image_dir=os.path.join(current_dir,'image_yhs')
 
@@ -27,36 +27,31 @@ character=pygame.image.load(os.path.join(image_dir,'character.png'))
 char_size=character.get_rect().size
 char_width=char_size[0]
 char_height=char_size[1]
-char_x_pos=(screen_width/2)-(char_width/2)
-char_y_pos=screen_height-char_height-100
 
-# 적 설정
-enemy=pygame.image.load(os.path.join(image_dir,'enemy.png'))
-enemy_size=enemy.get_rect().size
-enemy_width=enemy_size[0]
-enemy_height=enemy_size[1]
-enemy_x_pos=(screen_width/2)-(enemy_width/2)
-enemy_y_pos=screen_height-enemy_height-200
+# 바닥 설정
+floor=screen_height-char_height-100
+
+char_x_pos=(screen_width/2)-(char_width/2)
+char_y_pos=floor
 
 # 이동 속도
 char_speed=0.75
 
 # 이동 변수 초기화
 char_x_to=0
-char_y_to=0
 
+# 점프 관련 변수
+jump_active=False
+jump_speed=0
+jump_max=25
 gravity=1
-
-# 폰트 정의
-font=pygame.font.Font(None,40)
 
 # 게임 켜지면 실행할 놈들
 running=True
 while running:
 
     # 틱 설정
-    dt=clock.tick(120)
-    print('FPS:',str(format(clock.get_fps(),'.1f')))
+    dt=clock.tick(60)
 
     for event in pygame.event.get():
 
@@ -64,28 +59,33 @@ while running:
         if event.type==pygame.QUIT:
             running=False
 
-        char_y_to=-(gravity**2)
-
         # 키보드 눌렸을 때
         if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_UP:
-
-                char_y_to+=char_speed
-            elif event.key==pygame.K_LEFT:
+            if event.key==pygame.K_LEFT:
                 char_x_to-=char_speed
             elif event.key==pygame.K_RIGHT:
                 char_x_to+=char_speed
+            elif event.key==pygame.K_SPACE and not jump_active:  # 점프 중이 아닐 때만 점프 가능
+                jump_active=True
+                jump_speed=jump_max
 
         # 키보드 떼졌을 때
         if event.type==pygame.KEYUP:
-            if event.key==pygame.K_UP or event.key==pygame.K_DOWN:
-                char_y_to=0
-            elif event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT:
+            if event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT:
                 char_x_to=0
 
     # 캐릭터 좌표 변환 (*dt는 속도 보정값)
     char_x_pos+=char_x_to*dt
-    char_y_pos+=char_y_to*dt
+
+    # 점프 로직
+    if jump_active:
+        char_y_pos-=jump_speed  # 점프할 때 위로 올라감
+        jump_speed-=gravity  # 속도 감소 (중력 효과)
+        
+        # 바닥에 닿으면 점프 종료
+        if char_y_pos>=floor:
+            char_y_pos=floor
+            jump_active=False
 
     # x좌표 제한
     if char_x_pos<0:
@@ -93,30 +93,9 @@ while running:
     elif char_x_pos>screen_width-char_width:
         char_x_pos=screen_width-char_width
 
-    # y좌표 제한
-    if char_y_pos<320:
-        char_y_pos=320
-    elif char_y_pos>screen_height-char_height-100:
-        char_y_pos=screen_height-char_height-100
-
-    # rect 업데이트
-    char_rect=character.get_rect()
-    char_rect.left=char_x_pos
-    char_rect.top=char_y_pos
-
-    enemy_rect=enemy.get_rect()
-    enemy_rect.left=enemy_x_pos
-    enemy_rect.top=enemy_y_pos
-
-    # 충돌 감지
-    # if char_rect.colliderect(enemy_rect):
-    #     print('으앙 쥬금 ㅠ')
-    #     running=False
-
     # 애들 위치
     screen.blit(background,(0,0))
     screen.blit(character,(char_x_pos,char_y_pos))
-    # screen.blit(enemy,(enemy_x_pos,enemy_y_pos))
     pygame.display.update()
 
 # while문 끝나면(X 누르면) 게임 종료
