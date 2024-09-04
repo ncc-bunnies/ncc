@@ -5,8 +5,8 @@ pygame.init()
 os.system('cls')
 
 # 스크린 설정
-screen_width=480
-screen_height=640
+screen_width=1280
+screen_height=720
 screen=pygame.display.set_mode((screen_width,screen_height))
 
 # FPS 설정용
@@ -20,7 +20,7 @@ current_dir=os.path.dirname(__file__)
 image_dir=os.path.join(current_dir,'image_yhs')
 
 # 배경 설정
-background=pygame.image.load(os.path.join(image_dir,'background.png'))
+background=pygame.image.load(os.path.join(image_dir,'background_side.png'))
 
 # 캐릭터 설정
 character=pygame.image.load(os.path.join(image_dir,'character.png'))
@@ -29,7 +29,7 @@ char_width=char_size[0]
 char_height=char_size[1]
 
 # 바닥 설정
-floor=screen_height-char_height-100
+floor=screen_height-char_height-305
 
 char_x_pos=(screen_width/2)-(char_width/2)
 char_y_pos=floor
