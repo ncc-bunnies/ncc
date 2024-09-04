@@ -13,6 +13,7 @@ clock = pygame.time.Clock()
 background = pygame.image.load(r"ncc\hjw\asset\background.png")
 #섹
 
+#캐릭터
 character = pygame.image.load(r"ncc\hjw\asset\character.png")
 character_size = character.get_rect().size # 이미지의 크기를 구해옴
 character_width = character_size[0]
@@ -25,9 +26,17 @@ to_y = 0
 
 character_speed = 0.6
 
+#적
+enemy = pygame.image.load(r"ncc\hjw\asset\enemy.png")
+enemy_size = enemy.get_rect().size # 이미지의 크기를 구해옴
+enemy_width = enemy_size[0]
+enemy_height = enemy_size[1]
+enemy_x_pos = (screen_width / 2) - (enemy_width / 2) 
+enemy_y_pos = (screen_height / 2) - (enemy_height / 2)
+
 running = True
 while running:
-    dt = clock.tick(30)
+    dt = clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,8 +71,20 @@ while running:
         character_y_pos = 0
     elif character_y_pos > screen_height - character_height:
         character_y_pos = screen_height - character_height
+    
+    character_rect = character.get_rect()
+    character_rect.left = character_x_pos
+    character_rect.top = character_y_pos
+
+    enemy_rect = enemy.get_rect()
+
+    if character_rect.collidedict(enemy_rect):
+        print("충돌 했어요")
+        running = False
+    
     screen.blit(background, (0, 0))
     screen.blit(character, (character_x_pos, character_y_pos))
+    screen.blit(enemy, (enemy_x_pos, enemy_y_pos))
 
     pygame.display.update()
 
