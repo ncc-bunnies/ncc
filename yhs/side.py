@@ -65,7 +65,7 @@ while running:
                 char_x_to-=char_speed
             elif event.key==pygame.K_RIGHT:
                 char_x_to+=char_speed
-            elif event.key==pygame.K_SPACE and not jump_active:  # 점프 중이 아닐 때만 점프 가능
+            elif event.key==pygame.K_UP and not jump_active:  # 점프 중이 아닐 때만 점프 가능
                 jump_active=True
                 jump_speed=jump_max
 
