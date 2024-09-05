@@ -77,8 +77,11 @@ while running:
     character_rect.top = character_y_pos
 
     enemy_rect = enemy.get_rect()
+    enemy_rect.left = enemy_x_pos
+    enemy_rect.top = enemy_y_pos
 
-    if character_rect.collidedict(enemy_rect):
+
+    if character_rect.colliderect(enemy_rect):
         print("충돌 했어요")
         running = False
     
