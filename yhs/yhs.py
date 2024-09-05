@@ -43,8 +43,8 @@ enemy_y_pos=screen_height-enemy_height-200
 char_speed=0.75
 
 # 이동 변수 초기화
-to_x=0
-to_y=0
+char_x_to=0
+char_y_to=0
 
 # 폰트 정의
 font=pygame.font.Font(None,40)
@@ -66,24 +66,24 @@ while running:
         # 키보드 눌렸을 때
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_UP:
-                to_y-=char_speed
+                char_y_to-=char_speed
             elif event.key==pygame.K_DOWN:
-                to_y+=char_speed
+                char_y_to+=char_speed
             elif event.key==pygame.K_LEFT:
-                to_x-=char_speed
+                char_x_to-=char_speed
             elif event.key==pygame.K_RIGHT:
-                to_x+=char_speed
+                char_x_to+=char_speed
 
         # 키보드 떼졌을 때
         if event.type==pygame.KEYUP:
             if event.key==pygame.K_UP or event.key==pygame.K_DOWN:
-                to_y=0
+                char_y_to=0
             elif event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT:
-                to_x=0
+                char_x_to=0
 
     # 캐릭터 좌표 변환 (*dt는 속도 보정값)
-    char_x_pos+=to_x*dt
-    char_y_pos+=to_y*dt
+    char_x_pos+=char_x_to*dt
+    char_y_pos+=char_y_to*dt
 
     # x좌표 제한
     if char_x_pos<0:
