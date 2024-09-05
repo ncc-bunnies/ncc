@@ -43,7 +43,7 @@ char_x_to=0
 # 점프 관련 변수
 jump_active=False
 jump_speed=0
-jump_max=25
+jump_max=15
 gravity=1
 
 # 게임 켜지면 실행할 놈들
