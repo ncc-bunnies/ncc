@@ -28,12 +28,12 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 to_x -= 5
-            elif event.type == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 to_x += 5
-            elif event.type == pygame.K_UP:
-                to_y += 5
-            elif event.type == pygame.K_DOWN:
+            elif event.key == pygame.K_UP:
                 to_y -= 5
+            elif event.key == pygame.K_DOWN:
+                to_y += 5
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
