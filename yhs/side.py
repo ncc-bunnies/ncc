@@ -24,6 +24,7 @@ background=pygame.image.load(os.path.join(image_dir,'background_side.png'))
 
 # 캐릭터 설정
 char_none=pygame.image.load(os.path.join(image_dir,'character.png'))
+char_flip=pygame.transform.flip(char_none,True,False)
 char_jump_sheet=pygame.image.load(os.path.join(image_dir,'character_jump.png'))
 
 # 스프라이트 시트의 프레임 설정
@@ -32,11 +33,14 @@ frame_height=64
 sheet_width=char_jump_sheet.get_width()
 num_frames=sheet_width//frame_width
 char_jump_frames=[char_jump_sheet.subsurface(pygame.Rect(i*frame_width,0,frame_width,frame_height)) for i in range(num_frames)]
+char_jump_frames_flip=[pygame.transform.flip(char_jump_frames[i],True,False) for i in range(num_frames)]
 
 char=char_none
 char_size=char.get_rect().size
 char_width=char_size[0]
 char_height=char_size[1]
+
+facing=True
 
 # 바닥 설정
 floor=screen_height-char_height-305
@@ -74,8 +78,10 @@ while running:
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_LEFT:
                 char_x_move-=char_speed
+                facing=False
             elif event.key==pygame.K_RIGHT:
                 char_x_move+=char_speed
+                facing=True
             elif event.key==pygame.K_UP and not jump_active:  # 점프 중이 아닐 때만 점프 가능
                 jump_active=True
                 jump_speed=jump_max
@@ -99,17 +105,21 @@ while running:
         jump_anim_timer+=dt/1000  # dt를 초 단위로 변환하여 타이머 업데이트
         if jump_anim_timer>jump_anim_speed:
             jump_anim_timer=0
-            jump_frame=(jump_frame + 1)%len(char_jump_frames)
-        char=char_jump_frames[jump_frame]
+            jump_frame=(jump_frame+1)%len(char_jump_frames)
+        
+        if facing:
+            char=char_jump_frames[jump_frame]
+        else:
+            char=char_jump_frames_flip[jump_frame]
         
         # 바닥에 닿으면 점프 종료
         if char_y_pos>=floor:
             char_y_pos=floor
             jump_active=False
-            char=char_none  # 점프 후 기본 이미지로 돌아가기
+            char=char_none if facing else char_flip  # 점프 후 기본 이미지로 돌아가기
 
     else:
-        char=char_none  # 기본 이미지로 설정
+        char=char_none if facing else char_flip  # 기본 이미지로 설정
 
     # x좌표 제한
     if char_x_pos<0:
