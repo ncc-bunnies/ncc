@@ -99,7 +99,13 @@ while running:
     elapsed_time = (pygame.time.get_ticks() - start_ticks) / 1000
 
     timer = game_font.render(str(int(total_time - elapsed_time)), True, (255, 255, 255))
+    screen.blit(timer, (10, 10))
 
+    if total_time - elapsed_time <= 0:
+        print("타임아웃")
+        running = False
     pygame.display.update()
+
+pygame.time.delay(2000)
 
 pygame.quit()
