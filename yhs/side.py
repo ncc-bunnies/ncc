@@ -55,14 +55,14 @@ jump_speed = 0
 jump_max = 15
 gravity = 1
 jump_frame = 0
-jump_anim_speed = 0.1  # 애니메이션 속도 조절
+jump_anim_speed = 0.1
 jump_anim_timer = 0
 
 # 게임 루프
 running = True
 while running:
     # 틱 설정
-    dt = clock.tick(60)  # 원래의 dt 값을 유지
+    dt = clock.tick(60)
 
     for event in pygame.event.get():
         # X 눌러야 게임 꺼짐
