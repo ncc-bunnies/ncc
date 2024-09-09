@@ -17,10 +17,7 @@ cha_size = cha.get_rect().size
 cha_width = cha_size[0]
 cha_height = cha_size[1]
 cha_x_pos = screen_width / 2
-cha_y_pos = screen_height
-
-
-
+cha_y_pos = screen_height - cha_height
 
 
 running = True
@@ -29,9 +26,9 @@ while running:
             if event.type == pygame.QUIT:
                   running = False
 
-    screen.blit(h, (0, 0))       
-    screen.blit(cha_x_pos,cha_y_pos )
-    pygame.display.update() 
+    screen.blit(h, (0, 0))
+    screen.blit(cha,(cha_x_pos,cha_y_pos) )
+    pygame.display.update()
 
 
 
