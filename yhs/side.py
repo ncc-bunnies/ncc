@@ -51,9 +51,6 @@ jump_active=False
 jump_speed=0
 jump_max=15
 gravity=1
-jump_frame=0
-jump_anim_speed=0.1
-jump_anim_timer=0
 
 def update_char_image():
     global char
@@ -85,8 +82,6 @@ while running:
     if keys[pygame.K_UP] and not jump_active:  # 점프 중이 아닐 때만 점프 가능
         jump_active=True
         jump_speed=jump_max
-        jump_frame=0  # 점프 애니메이션 초기화
-        jump_anim_timer=0  # 애니메이션 타이머 초기화
 
     # 캐릭터 좌표 변환 (*dt는 속도 보정값)
     char_x_pos+=char_x_to*dt
