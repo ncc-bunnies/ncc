@@ -9,4 +9,4 @@ screen_height = 640
 pygame.display.set_mode((screen_width,screen_height))
 
 
-pygame.display.set_caption("스톤월드")
+pygame.display.set_caption("")
