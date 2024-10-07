@@ -2,7 +2,7 @@ from ursina import * #ursina의 모든 개체
 from ursina.prefabs.first_person_controller import FirstPersonController
 
 
-aaaa
+#aaaa
 
 app=Ursina()
 
