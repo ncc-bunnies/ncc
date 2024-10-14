@@ -1,12 +1,3 @@
-#길상현 코드
-import pygame
-
-pygame.init() #초기화
-
-#화면크기
-screen_width = 480 # 가로 크기
-screen_height = 640 
-pygame.display.set_mode((screen_width,screen_height))
-
-
-pygame.display.set_caption("")
+version https://git-lfs.github.com/spec/v1
+oid sha256:226edc06636978b2fc80024403cb7d28243a0e5ced0322afaa7d9edb5cb09d92
+size 216
