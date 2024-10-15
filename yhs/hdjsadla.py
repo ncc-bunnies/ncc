@@ -14,7 +14,7 @@ E='exit' #exit
 class Player(FirstPersonController):
     def __init__(self):
         super().__init__(
-            model='cube', #lemon_1k.fbx\lemon_1k.fbx
+            model='none', #lemon_1k.fbx\lemon_1k.fbx
             #color=color.white,
             #position=(0,5,0),
             scale=1,
@@ -31,7 +31,7 @@ class Exit(Entity):
             model='cube',
             color=color.red,
             position=(i*5,-1,j*5),
-            scale=(6,26,6),
+            scale=(6,25,6),
             collider='box',
             texture='white_cube'
         )
@@ -93,11 +93,11 @@ for i in range(len(MAP)):
                 continue
             wall=Entity(
                 model='cube',
-                color=color.green,
+                color=color.black,
                 position=(i*5,-1,j*5),
                 scale=(5,25,5),
                 collider='box',
-                texture='white_cube'
+                texture='none'
             )
 
 plane=Entity(
