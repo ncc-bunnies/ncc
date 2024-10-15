@@ -4,14 +4,14 @@ import pygame
 pygame.init() #초기화
 
 #화면크기
-가로 = 480 # 가로 크기
+가로 = 1000 # 가로 크기
 세로 = 640 
 크기 = [가로,세로]
-pygame.display.set_mode((크기))
+화면 = pygame.display.set_mode((크기))
 
 프레임 = pygame.time.Clock()
 
-폰트글꼴 = "C:\Users\ncc7\Desktop\khj\ncc\gsh\GabiaBombaram\GabiaBombaram\gabia_bombaram.ttf"
+폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
 폰트크기 = 20
 폰트 = pygame.font.Font(폰트글꼴,폰트크기)
 
@@ -24,4 +24,3 @@ while 오딘:
             오딘 = False
 
     프레임.tick (60)
-
