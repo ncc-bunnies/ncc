@@ -1,12 +1,20 @@
 #길상현 코드
 import pygame
 
-pygame.init() #초기화
+pygame.init()
 
-#화면크기
-screen_width = 480 # 가로 크기
+
+screen_width = 480
 screen_height = 640 
 pygame.display.set_mode((screen_width,screen_height))
 
 
-pygame.display.set_caption("")
+pygame.display.set_caption("아")
+
+전원 = True
+
+while 전원:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            전원 = False
+
