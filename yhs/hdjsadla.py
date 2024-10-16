@@ -20,10 +20,15 @@ class Player(FirstPersonController):
             scale=1,
             collider='mesh',
             texture='white_cube',
-            speed=15,
+            speed=10,
             gravity=1,
-            jump_height=5
+            jump_height=0
         )
+    def input(self, key):
+        if key=='shift':
+            self.speed=15
+        else:
+            self.speed=10
 
 class Exit(Entity):
     def __init__(self,i,j):
@@ -62,16 +67,16 @@ player=Player()
 #EditorCamera()
 
 MAP=[
-    [W,W,W,W,W,W,W,W,W,P,W,W,W,W,W,W,W,W],
+    [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W],
     [W,W,W,W,W,W,W,W,_,_,W,_,W,W,W,W,W,W],
     [W,W,W,W,_,W,W,W,_,W,_,_,W,W,W,W,W,W],
     [W,W,W,_,_,W,_,_,_,W,W,_,W,W,W,_,W,W],
     [W,W,W,W,_,_,_,W,_,_,_,_,_,_,W,_,W,W],
     [W,W,_,W,W,_,W,W,_,W,W,W,W,_,W,_,_,W],
     [W,_,_,_,_,_,_,_,_,_,_,W,W,_,W,_,W,W],
-    [W,_,W,W,W,W,_,W,_,W,_,_,_,_,W,_,W,W],
-    [W,W,W,W,_,_,_,_,W,W,_,W,_,W,W,_,W,W],
-    [W,W,W,_,_,W,W,_,W,W,W,W,_,_,_,_,_,W],
+    [W,_,W,W,W,W,_,_,_,_,_,_,_,_,W,_,W,W],
+    [W,W,W,W,_,_,_,_,_,P,_,W,_,W,W,_,W,W],
+    [W,W,W,_,_,W,W,_,_,_,_,_,_,_,_,_,_,W],
     [W,W,_,_,W,W,W,_,_,_,_,_,_,W,W,W,_,W],
     [W,W,_,W,W,W,W,W,_,W,W,W,W,_,W,W,_,W],
     [W,W,_,W,W,_,_,_,_,_,W,W,W,_,W,W,_,W],
@@ -86,7 +91,7 @@ for i in range(len(MAP)):
     for j in range(len(MAP[i])):
         if MAP[i][j]:
             if MAP[i][j]=='player':
-                player.position=((i-2)*5,5,j*5)
+                player.position=(i*5,5,j*5)
                 continue
             if MAP[i][j]=='exit':
                 exitdoor=Exit(i,j)
@@ -107,6 +112,14 @@ plane=Entity(
     position=(0,-2,0),
     collider='mesh',
     texture='none'
+)
+ciling=Entity(
+    model='Plane',
+    color=color.black,
+    scale=(500,1,500),
+    position=(0,25,0),
+    collider='mesh',
+    rotation=(0,0,180)
 )
 
 app.run()
