@@ -20,7 +20,7 @@ pygame.init() #초기화
 오딘 = True
 while 오딘:
     for event in pygame.event.get():
-        if UIT:
-            오딘 = Falseevent.type == pygame.Q
+        if event.type == pygame.QUIT:
+            오딘 = False
 
     프레임.tick (60)
