@@ -1,20 +1,27 @@
 #길상현 코드
 import pygame
 
-pygame.init()
+pygame.init() #초기화
 
+#화면크기
+가로 = 1000 # 가로 크기
+세로 = 640 
+크기 = [가로,세로]
+화면 = pygame.display.set_mode((크기))
 
-screen_width = 480
-screen_height = 640 
-pygame.display.set_mode((screen_width,screen_height))
+프레임 = pygame.time.Clock()
 
+폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
+폰트크기 = 20
+폰트 = pygame.font.Font(폰트글꼴,폰트크기)
 
-pygame.display.set_caption("아")
+게임 = pygame.display.set_caption("오딘마지막전사")
 
-전원 = True
-
-while 전원:
+오딘 = True
+while 오딘:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            전원 = False
+            오딘 = False
+
+    프레임.tick (60)
 
