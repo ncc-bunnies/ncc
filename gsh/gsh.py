@@ -12,6 +12,7 @@ pygame.init() #초기화
 
 프레임 = pygame.time.Clock()
 
+
 #폰트
 폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
 폰트크기 = 20
@@ -31,11 +32,11 @@ while 오딘:
         if event.type == pygame.QUIT:
             오딘 = False
         elif event.type == pygame.KEYDOWN:
-            if 시간 is "기록":  # 타이머가 시작되지 않았다면
-                시간 = time.time()  # 현재 시간을 기록
+            if 시간 is "기록": 
+                시간 = time.time() 
             폰트출력 = f"pygame.KEYDOWN: {pygame.key.name(event.key)}"
 
-    if 시간 is not "기록" and time.time() - 시간 > 1:
+    if 시간 is not "기록" and time.time() - 시간 > 0.5:
         폰트출력 = ""
         시간 = "기록"
 
