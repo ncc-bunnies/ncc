@@ -20,15 +20,14 @@ class Player(FirstPersonController):
             scale=1,
             collider='mesh',
             texture='white_cube',
-            speed=10,
             gravity=1,
             jump_height=0
         )
     def input(self, key):
-        if key=='shift':
+        if held_keys['shift']:
             self.speed=15
         else:
-            self.speed=10
+            self.speed=5
 
 class Exit(Entity):
     def __init__(self,i,j):
