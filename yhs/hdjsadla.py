@@ -101,9 +101,8 @@ for i in range(len(MAP)):
                 position=(i*5,-1,j*5),
                 scale=(5,25,5),
                 collider='box',
-                texture='none'
             )
-
+            
 plane=Entity(
     model='Plane',
     color=color.red,
