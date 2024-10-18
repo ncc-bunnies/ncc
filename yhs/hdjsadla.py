@@ -4,7 +4,12 @@ import os
 
 os.system('cls')
 
-app=Ursina()
+app=Ursina(
+    size=(1000,750),
+    borderless=False,
+    title=''
+)
+
 
 W=True #wall
 _=False #none
@@ -35,9 +40,9 @@ class Exit(Entity):
             model='cube',
             color=color.red,
             position=(i*5,-1,j*5),
-            scale=(6,25,6),
+            scale=(5,25,5),
             collider='box',
-            texture='white_cube'
+            texture=''
         )
 
         self.player=player
