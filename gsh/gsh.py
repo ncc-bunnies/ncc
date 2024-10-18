@@ -17,6 +17,18 @@ pygame.init() #초기화
 폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
 폰트크기 = 20
 폰트 = pygame.font.Font(폰트글꼴,폰트크기)
+가로 = 1000 # 가로 크기
+세로 = 640 
+크기 = [가로,세로]
+화면 = pygame.display.set_mode((크기))
+
+프레임 = pygame.time.Clock()
+
+
+#폰트
+폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
+폰트크기 = 20
+폰트 = pygame.font.Font(폰트글꼴,폰트크기)
 폰트출력 = "pygame.KEYDOWN"
 
 게임 = pygame.display.set_caption("오딘마지막전사")
@@ -66,3 +78,4 @@ pygame.quit()
 
 
 #아아ㅏㅇ아ㅏ아아
+
