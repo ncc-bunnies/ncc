@@ -25,7 +25,7 @@ class Player(FirstPersonController):
         )
     def input(self, key):
         if held_keys['shift']:
-            self.speed=15
+            self.speed=10
         else:
             self.speed=5
 
