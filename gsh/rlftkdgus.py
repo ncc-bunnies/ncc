@@ -1,48 +1,101 @@
-
 import pygame
-import time
+import random
 
-pygame.init()  # 초기화
+# 게임 초기화
+pygame.init()
 
-# 화면 크기
-가로 = 1000  # 가로 크기
-세로 = 640 
-크기 = [가로, 세로]
-화면 = pygame.display.set_mode(크기)
+# 화면 크기 설정
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("타워 디펜스 게임")
 
-프레임 = pygame.time.Clock()
+# 색상 정의
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
-폰트글꼴 = "C:/Windows/Fonts/malgun.ttf"
-폰트크기 = 20
-폰트 = pygame.font.Font(폰트글꼴, 폰트크기)
+# 타워 클래스
+class Tower:
+    def __init__(self, x, y):
+        self.rect = pygame.Rect(x, y, 50, 50)
 
-pygame.display.set_caption("오딘 마지막 전사")
+    def draw(self):
+        pygame.draw.rect(screen, GREEN, self.rect)
 
-오딘 = True
-폰트출력 = ""  # 초기화
-start_time = "기록"  # 타이머 초기화
+# 적 클래스
+class Enemy:
+    def __init__(self, path):
+        self.path = path
+        self.index = 0
+        self.rect = pygame.Rect(path[0][0], path[0][1], 50, 50)  # 수정된 부분
+        self.speed = 2
 
-while 오딘:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            오딘 = False
-        elif event.type == pygame.KEYDOWN:
-            if start_time is "기록":  # 타이머가 시작되지 않았다면
-                start_time = time.time()  # 현재 시간을 기록
-            폰트출력 = f"pygame.KEYDOWN: {pygame.key.name(event.key)}"
+    def move(self):
+        if self.index < len(self.path) - 1:
+            target = self.path[self.index + 1]
+            if self.rect.x < target[0]:
+                self.rect.x += self.speed
+            elif self.rect.x > target[0]:
+                self.rect.x -= self.speed
+            if self.rect.y < target[1]:
+                self.rect.y += self.speed
+            elif self.rect.y > target[1]:
+                self.rect.y -= self.speed
+            
+            # 다음 경로 점으로 이동
+            if self.rect.topleft == target:
+                self.index += 1
 
-    if start_time is not "기록" and time.time() - start_time > 1:  # 1초가 지났다면
-        폰트출력 = ""  # 출력 초기화
-        start_time = "기록"  # 타이머 초기화
+        # 적이 마지막 경로 점에 도달하면 True를 반환
+        return self.index == len(self.path) - 1 and self.rect.topleft == self.path[-1]
 
-    화면.fill((0, 0, 0))  # 화면을 검은색으로 채우기
-    폰트색 = 폰트.render(폰트출력, True, (255, 255, 255))
-    폰트위치 = 폰트색.get_rect(center=(가로 // 2, 세로 // 2))
-    
-    화면.blit(폰트색, 폰트위치)
-    
-    pygame.display.flip()  # 화면 업데이트
-    프레임.tick(60)
+    def draw(self):
+        pygame.draw.rect(screen, RED, self.rect)
 
-pygame.quit()  # Pygame 종료
+# 경로 정의
+path = [(0, 300), (200, 300), (200, 100), (600, 100), (600, 300), (800, 300)]
 
+# 게임 루프
+def main():
+    clock = pygame.time.Clock()
+    running = True
+    towers = []
+    enemies = []
+
+    while running:
+        screen.fill(WHITE)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                # 마우스 클릭 시 타워 생성
+                if event.button == 1:  # 왼쪽 버튼 클릭
+                    towers.append(Tower(event.pos[0], event.pos[1]))
+
+        # 적 생성
+        if random.randint(1, 100) == 1:  # 생성 빈도 조절
+            enemies.append(Enemy(path))
+
+        # 적 이동 및 그리기
+        for enemy in enemies[:]:
+            if enemy.move():
+                enemies.remove(enemy)  # 마지막 경로 점에 도달한 적 제거
+            enemy.draw()
+
+        # 타워 그리기
+        for tower in towers:
+            tower.draw()
+
+        pygame.display.flip()
+
+        # FPS 설정
+        clock.tick(60)
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        print("에러가 발생했습니다:", e)
