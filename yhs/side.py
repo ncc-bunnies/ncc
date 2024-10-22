@@ -112,3 +112,5 @@ while running:
 
 # while문 끝나면(X 누르면) 게임 종료
 pygame.quit()
+
+#Qjzld
