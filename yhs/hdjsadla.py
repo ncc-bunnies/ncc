@@ -19,7 +19,7 @@ E='exit' #exit
 class Player(FirstPersonController):
     def __init__(self):
         super().__init__(
-            model='none', #lemon_1k.fbx\lemon_1k.fbx
+            #model='none', #lemon_1k.fbx\lemon_1k.fbx
             #color=color.white,
             #position=(0,5,0),
             scale=1,
@@ -42,7 +42,7 @@ class Exit(Entity):
             position=(i*5,-1,j*5),
             scale=(5,25,5),
             collider='box',
-            texture=''
+            #texture=''
         )
 
         self.player=player
@@ -52,6 +52,10 @@ class Exit(Entity):
             origin=(0,0),
             scale=9,
             visible=False
+        )
+        self.audio=Audio(
+            r'C:\Users\ncc18\Desktop\NCC_yhs\ncc\ncc\yhs\sss.mp3',
+            autoplay=True
         )
 
     def clear(self):
@@ -114,7 +118,7 @@ plane=Entity(
     scale=(500,1,500),
     position=(0,-2,0),
     collider='mesh',
-    texture='none'
+    #texture=''
 )
 ciling=Entity(
     model='Plane',
