@@ -54,9 +54,10 @@ class Exit(Entity):
             visible=False
         )
         self.audio=Audio(
-            r'C:\Users\ncc18\Desktop\NCC_yhs\ncc\ncc\yhs\sss.mp3',
+            '\\yhs\\sss.mp3',
             autoplay=True
         )
+        self.audio.play()
 
     def clear(self):
         dis=(self.player.position-self.position).length()
