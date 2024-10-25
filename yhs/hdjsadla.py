@@ -4,7 +4,11 @@ import os
 
 os.system('cls')
 
-app=Ursina()
+app=Ursina(
+    title='',
+    borderless=False,
+    size=(1000,750)
+)
 
 W=True #wall
 _=False #none
@@ -14,22 +18,19 @@ E='exit' #exit
 class Player(FirstPersonController):
     def __init__(self):
         super().__init__(
-            #model='none', #lemon_1k.fbx\lemon_1k.fbx
+            model='cube', #lemon_1k.fbx\lemon_1k.fbx
             #color=color.white,
             #position=(0,5,0),
             scale=1,
-            collider='mesh',
-            texture='white_cube',
+            collider='box',
+            #texture='',
             gravity=1,
-            jump_height=0
+            jump_height=0,
+            visible=False
         )
     def input(self, key):
         if held_keys['shift']:
-<<<<<<< HEAD
             self.speed=9
-=======
-            self.speed=11
->>>>>>> 9155958 (yhs)
         else:
             self.speed=5
 
@@ -55,7 +56,7 @@ class Exit(Entity):
 
     def clear(self):
         dis=(self.player.position-self.position).length()
-        if dis<4:
+        if self.player.intersects(self):
             self.player.enabled=False
             self.text.visible=True
 
