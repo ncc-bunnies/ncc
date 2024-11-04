@@ -22,7 +22,7 @@ class Player(FirstPersonController):
             #color=color.white,
             #position=(0,5,0),
             scale=1,
-            collider='mesh',
+            collider='box',
             texture='white_cube',
             gravity=1,
             jump_height=0
@@ -55,7 +55,7 @@ class Exit(Entity):
 
     def clear(self):
         dis=(self.player.position-self.position).length()
-        if dis<4:
+        if self.intersects(self.player):
             self.player.enabled=False
             self.text.visible=True
 
