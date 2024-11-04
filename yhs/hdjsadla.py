@@ -106,7 +106,7 @@ for i in range(len(MAP)):
             
 plane=Entity(
     model='Plane',
-    color=color.red,
+    color=color.dark_gray,
     scale=(500,1,500),
     position=(0,-2,0),
     collider='mesh',
