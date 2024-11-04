@@ -4,7 +4,11 @@ import os
 
 os.system('cls')
 
-app=Ursina()
+app=Ursina(
+    title='',
+    borderless=False,
+    size=(1000,750)
+)
 
 W=True #wall
 _=False #none
@@ -25,7 +29,7 @@ class Player(FirstPersonController):
         )
     def input(self, key):
         if held_keys['shift']:
-            self.speed=15
+            self.speed=9
         else:
             self.speed=5
 
