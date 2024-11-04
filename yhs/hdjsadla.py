@@ -70,24 +70,21 @@ player=Player()
 #EditorCamera()
 
 MAP=[
-    [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W],
-    [W,W,W,W,W,W,W,W,_,_,W,_,W,W,W,W,W,W],
-    [W,W,W,W,_,W,W,W,_,W,_,_,W,W,W,W,W,W],
-    [W,W,W,_,_,W,_,_,_,W,W,_,W,W,W,_,W,W],
-    [W,W,W,W,_,_,_,W,_,_,_,_,_,_,W,_,W,W],
-    [W,W,_,W,W,_,W,W,_,W,W,W,W,_,W,_,_,W],
-    [W,_,_,_,_,_,_,_,_,_,_,W,W,_,W,_,W,W],
-    [W,_,W,W,W,W,_,_,_,_,_,_,_,_,W,_,W,W],
-    [W,W,W,W,_,_,_,_,_,P,_,W,_,W,W,_,W,W],
-    [W,W,W,_,_,W,W,_,_,_,_,_,_,_,_,_,_,W],
-    [W,W,_,_,W,W,W,_,_,_,_,_,_,W,W,W,_,W],
-    [W,W,_,W,W,W,W,W,_,W,W,W,W,_,W,W,_,W],
-    [W,W,_,W,W,_,_,_,_,_,W,W,W,_,W,W,_,W],
-    [W,W,_,W,W,_,W,W,W,_,_,_,_,_,W,W,_,W],
-    [W,W,_,_,_,_,W,W,W,W,W,_,W,W,W,W,_,W],
-    [W,W,W,W,W,W,W,_,_,_,_,_,W,W,_,_,_,W],
-    [W,W,W,W,W,W,W,_,W,W,W,W,W,_,_,W,W,W],
-    [W,W,W,W,W,W,W,E,W,W,W,W,W,W,W,W,W,W]
+    [W,W,W],
+    [W,P,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W,W,W,W,W,W,W,W,W,W,W],
+    [W,_,_,_,_,_,_,_,_,_,_,_,E],
+    [W,W,W,W,W,W,W,W,W,W,W,W,W]
 ]
 
 for i in range(len(MAP)):
