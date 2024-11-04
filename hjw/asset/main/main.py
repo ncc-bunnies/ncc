@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:aeb145ca26d163b5bf380a9059aa086a1ff2ec41052075bb5531edddae74b433
-size 292
+import pygame as pg
+import constants as c
+
+pg.init()
+
+clock = pg.time.Clock()
+
+screen = pg.display.set_mode((c.SCREEN_WIDTH, c.SCREEN_HEIGHT))
+
+run = True
+while run:
+
+    clock.tick(c.FPS)
+
+    for event in pg.event.get():
+
+        if event.type == pg.QUIT:
+            run = False
+
+pg.quit()

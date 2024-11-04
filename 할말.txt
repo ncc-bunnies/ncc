@@ -1,3 +1,2 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:adfb0c66e9cb1989e785f99dc1cad105c5ba6aa5c6d2bcc7d86b675989ac647e
-size 63
+yhs, 2024-09-08 03:43 PM
+여행가서 월요일에 못나와요
