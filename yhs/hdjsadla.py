@@ -10,7 +10,7 @@ app=Ursina(
     size=(1000,750)
 )
 
-W=True #wall
+B=True #Block
 _=False #none
 P='player' #player
 E='exit' #exit
@@ -70,21 +70,21 @@ player=Player()
 #EditorCamera()
 
 MAP=[
-    [W,W,W],
-    [W,P,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W],
-    [W,_,W,W,W,W,W,W,W,W,W,W,W],
-    [W,_,_,_,_,_,_,_,_,_,_,_,E],
-    [W,W,W,W,W,W,W,W,W,W,W,W,W]
+    [B,B,B],
+    [B,P,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B],
+    [B,_,B,B,B,B,B,B,B,B,B,B,B],
+    [B,_,_,_,_,_,_,_,_,_,_,_,E],
+    [B,B,B,B,B,B,B,B,B,B,B,B,B]
 ]
 
 for i in range(len(MAP)):
