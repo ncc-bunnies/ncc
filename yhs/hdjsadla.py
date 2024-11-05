@@ -10,7 +10,7 @@ app=Ursina(
     size=(1000,750)
 )
 
-B=True #Block
+W=True #Block
 _=False #none
 P='player' #player
 E='exit' #exit
@@ -57,15 +57,15 @@ class Exit(Entity):
         dis=(self.player.position-self.position).length()
         a=Audio(
             'kkk',
-            volume=(4/dis)*3,
+            volume=256/(dis**2),
             pitch=1,
-            balance=-5,
+            balance=0,
             loop=True
         )
         if self.intersects(self.player):
             self.player.enabled=False
             self.text.visible=True
-            a.autoplay=False
+            a.stop()
         
 
     def update(self):
@@ -79,21 +79,21 @@ player=Player()
 #EditorCamera()
 
 MAP=[
-    [B,B,B],
-    [B,P,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B],
-    [B,_,B,B,B,B,B,B,B,B,B,B,B],
-    [B,_,_,_,_,_,_,_,_,_,_,_,E],
-    [B,B,B,B,B,B,B,B,B,B,B,B,B]
+    [W,W,W],
+    [W,P,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W],
+    [W,_,W,W,W,W,W,W,W,W,W,W,W],
+    [W,_,_,_,_,_,_,_,_,_,_,_,E],
+    [W,W,W,W,W,W,W,W,W,W,W,W,W]
 ]
 
 for i in range(len(MAP)):
