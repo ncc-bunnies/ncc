@@ -53,22 +53,22 @@ class Exit(Entity):
             visible=False
         )
 
-    def clear(self):
+    def sound(self):
         dis=(self.player.position-self.position).length()
         a=Audio(
             'kkk',
             volume=256/(dis**2),
-            pitch=1,
-            balance=0,
             loop=True
         )
+    
+    def clear(self):
         if self.intersects(self.player):
             self.player.enabled=False
             self.text.visible=True
-            a.stop()
         
 
     def update(self):
+        self.sound()
         self.clear()
     
 def input(key):
