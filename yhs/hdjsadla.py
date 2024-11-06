@@ -16,17 +16,16 @@ P='player' #player
 E='exit' #exit
 
 class Player(FirstPersonController):
-    def __init__(self):
+    def __init__(self,i,j):
         super().__init__(
-            #model='none', #lemon_1k.fbx\lemon_1k.fbx
-            #color=color.white,
-            #position=(0,5,0),
+            position=(i*5,5,j*5),
             scale=1,
             collider='box',
             texture='white_cube',
             gravity=1,
             jump_height=0
         )
+        
     def input(self, key):
         if held_keys['shift']:
             self.speed=9
@@ -66,7 +65,6 @@ class Exit(Entity):
             self.player.enabled=False
             self.text.visible=True
         
-
     def update(self):
         self.sound()
         self.clear()
@@ -75,7 +73,6 @@ def input(key):
     if key=='escape':
         app.quit()
 
-player=Player()
 #EditorCamera()
 
 MAP=[
@@ -100,7 +97,7 @@ for i in range(len(MAP)):
     for j in range(len(MAP[i])):
         if MAP[i][j]:
             if MAP[i][j]=='player':
-                player.position=(i*5,5,j*5)
+                player=Player(i,j)
                 continue
             if MAP[i][j]=='exit':
                 exitdoor=Exit(i,j)
@@ -121,6 +118,7 @@ plane=Entity(
     collider='mesh',
     #texture=''
 )
+
 ciling=Entity(
     model='Plane',
     color=color.black,
