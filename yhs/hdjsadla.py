@@ -93,7 +93,7 @@ def input(key):
         app.quit()
 
 #EditorCamera()
-tp_pos=(-20,-20,-20)
+tp_pos=(20,5,7)
 
 MAP=[
     [W,W,W],
@@ -110,7 +110,21 @@ MAP=[
     [W,_,W],
     [W,_,W,W,W,W,W,W,W,W,W,W,W],
     [W,_,_,_,_,_,_,_,_,_,_,_,T],
-    [W,W,W,W,W,W,W,W,W,W,W,W,W]
+    [W,W,W,W,W,W,W,W,W,W,W,W,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,_,_,_,W],
+    [W,W,_,W,W],
+    [_,W,E,W,_],
 ]
 
 for i in range(len(MAP)):
