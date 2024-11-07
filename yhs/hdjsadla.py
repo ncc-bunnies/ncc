@@ -10,7 +10,7 @@ app=Ursina(
     size=(1000,750)
 )
 
-W=True #Block
+W=True #Wall
 _=False #none
 P='player' #player
 E='exit' #exit
