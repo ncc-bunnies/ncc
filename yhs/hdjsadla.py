@@ -11,9 +11,10 @@ app=Ursina(
 )
 
 W=True #Wall
-_=False #none
-P='player' #player
-E='exit' #exit
+_=False #None
+P='player' #Player
+E='exit' #Exit
+T='warp' #warp
 
 class Player(FirstPersonController):
     def __init__(self,i,j):
@@ -39,8 +40,7 @@ class Exit(Entity):
             color=color.red,
             position=(i*5,-1,j*5),
             scale=(5,25,5),
-            collider='box',
-            #texture=''
+            collider='box'
         )
 
         self.player=player
@@ -68,12 +68,32 @@ class Exit(Entity):
     def update(self):
         self.sound()
         self.clear()
+
+class TP(Entity):
+    def __init__(self,i,j,tp_pos):
+        super().__init__(
+            model='cube',
+            color=color.red,
+            position=(i*5,-1,j*5),
+            scale=(5,25,5),
+            collider='box'
+        )
     
+        self.player=player
+
+    def warp(self):
+        if self.intersects(self.player):
+            self.player.position=tp_pos
+    
+    def update(self):
+        self.warp()
+
 def input(key):
     if key=='escape':
         app.quit()
 
 #EditorCamera()
+tp_pos=(-20,-20,-20)
 
 MAP=[
     [W,W,W],
@@ -89,7 +109,7 @@ MAP=[
     [W,_,W],
     [W,_,W],
     [W,_,W,W,W,W,W,W,W,W,W,W,W],
-    [W,_,_,_,_,_,_,_,_,_,_,_,E],
+    [W,_,_,_,_,_,_,_,_,_,_,_,T],
     [W,W,W,W,W,W,W,W,W,W,W,W,W]
 ]
 
@@ -100,7 +120,10 @@ for i in range(len(MAP)):
                 player=Player(i,j)
                 continue
             if MAP[i][j]=='exit':
-                exitdoor=Exit(i,j)
+                exit=Exit(i,j)
+                continue
+            if MAP[i][j]=="warp":
+                tp=TP(i,j,tp_pos)
                 continue
             wall=Entity(
                 model='cube',
@@ -119,7 +142,7 @@ plane=Entity(
     #texture=''
 )
 
-ciling=Entity(
+ceiling=Entity(
     model='Plane',
     color=color.black,
     scale=(500,1,500),
