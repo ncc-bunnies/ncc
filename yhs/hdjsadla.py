@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+#from ursina.shaders.screenspace_shaders.fxaa import *
 import os
 
 os.system('cls')
@@ -9,6 +10,8 @@ app=Ursina(
     borderless=False,
     size=(1000,750)
 )
+
+#camera.shader=fxaa_shader
 
 W=True #Wall
 _=False #None
@@ -93,7 +96,7 @@ def input(key):
         app.quit()
 
 #EditorCamera()
-tp_pos=(20,5,7)
+tp_pos=(75,0,10)
 
 MAP=[
     [W,W,W],
@@ -164,5 +167,14 @@ ceiling=Entity(
     collider='mesh',
     rotation=(0,0,180)
 )
+
+pos_print=Text(
+    origin=(0,0)
+)
+
+def update():
+    global ppos
+    ppos=[int(oo) for oo in (player.position.x,player.position.y,player.position.z)]
+    pos_print.text=ppos
 
 app.run()
