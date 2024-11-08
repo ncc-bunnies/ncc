@@ -19,6 +19,9 @@ P='player' #Player
 E='exit' #Exit
 T='warp' #warp
 
+tp_pos=(75,0,10)
+tp_max=1
+
 class Player(FirstPersonController):
     def __init__(self,i,j):
         super().__init__(
@@ -35,6 +38,28 @@ class Player(FirstPersonController):
             self.speed=9
         else:
             self.speed=5
+
+class TP(Entity):
+    def __init__(self,i,j,tp_pos,tp_max):
+        super().__init__(
+            model='cube',
+            color=color.red,
+            position=(i*5,-1,j*5),
+            scale=(5,25,5),
+            collider='box'
+        )
+    
+        self.player=player
+        self.tp_pos=tp_pos
+
+    def warp(self):
+        global tp_max
+        if self.intersects(self.player):
+            self.player.position=self.tp_pos
+            tp_max-=1
+    
+    def update(self):
+        self.warp()
 
 class Exit(Entity):
     def __init__(self,i,j):
@@ -72,31 +97,11 @@ class Exit(Entity):
         self.sound()
         self.clear()
 
-class TP(Entity):
-    def __init__(self,i,j,tp_pos):
-        super().__init__(
-            model='cube',
-            color=color.red,
-            position=(i*5,-1,j*5),
-            scale=(5,25,5),
-            collider='box'
-        )
-    
-        self.player=player
-
-    def warp(self):
-        if self.intersects(self.player):
-            self.player.position=tp_pos
-    
-    def update(self):
-        self.warp()
-
 def input(key):
     if key=='escape':
         app.quit()
 
 #EditorCamera()
-tp_pos=(75,0,10)
 
 MAP=[
     [W,W,W],
