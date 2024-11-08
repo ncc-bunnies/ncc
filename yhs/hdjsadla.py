@@ -8,7 +8,7 @@ os.system('cls')
 
 app=Ursina(
     title='',
-    icon='C:\\Users\\user\\Desktop\\WorkSpaces\\ncc\\yhs\\logo.ico',
+    icon='logo.ico',
     borderless=False,
     size=(1000,750)
 )
@@ -98,10 +98,10 @@ class Exit(Entity):
     def update(self):
         self.sound()
         self.clear()
-        
+
 def input(key):
     if key=='escape':
-        app.quit()
+        quit()
     if key=='f11':
         window.fullscreen=not window.fullscreen
 
@@ -149,7 +149,7 @@ for i in range(len(MAP)):
                 exit=Exit(i,j)
                 continue
             if MAP[i][j]=="warp":
-                tp=TP(i,j,tp_pos)
+                tp=TP(i,j,tp_pos,tp_max)
                 continue
             wall=Entity(
                 model='cube',
