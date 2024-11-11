@@ -5,8 +5,10 @@ import os
 
 os.system('cls')
 
+
 app=Ursina(
     title='',
+    icon='logo.ico',
     borderless=False,
     size=(1000,750)
 )
@@ -100,7 +102,9 @@ class Exit(Entity):
 
 def input(key):
     if key=='escape':
-        app.quit()
+        quit()
+    if key=='f11':
+        window.fullscreen=not window.fullscreen
 
 #EditorCamera()
 
