@@ -20,6 +20,7 @@ _=False #None
 P='player' #Player
 E='exit' #Exit
 T='warp' #warp
+H='hhh' #뭘보냐?
 
 tp_pos=[(150,0,5),(75,0,10)]
 tp_max=2
@@ -121,9 +122,9 @@ MAP=[
     [W,_,W],
     [W,_,W],
     [W,_,W],
-    [W,_,W,W,W,W,W,W,W,W,W,W,W],
-    [W,_,_,_,_,_,_,_,_,_,_,_,T],
-    [W,W,W,W,W,W,W,W,W,W,W,W,W],
+    [W,_,W,W,W,W,W,W,W,W,W,W,W,W],
+    [W,_,_,_,_,_,_,_,_,_,_,_,T,W],
+    [W,W,W,W,W,W,W,W,W,W,W,W,W,W],
     [W,_,_,_,W],
     [W,_,_,_,W],
     [W,_,_,_,W],
@@ -137,9 +138,9 @@ MAP=[
     [W,_,_,_,W],
     [W,_,_,_,W],
     [W,W,_,W,W],
-    [_,W,T,W,_],
+    [W,W,T,W,W],
     [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W],
-    [W,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,W],
+    [W,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H],
     [W,W,W,W,W,W,W,W,W,W,_,W,W,W,W,W,W,W,W,W,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
@@ -165,6 +166,7 @@ MAP=[
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,E,W],
+    [_,_,_,_,_,_,_,_,_,W,W,W],
 ]
 
 for i in range(len(MAP)):
@@ -176,15 +178,23 @@ for i in range(len(MAP)):
             if MAP[i][j]=='exit':
                 exit=Exit(i,j)
                 continue
-            if MAP[i][j]=="warp":
+            if MAP[i][j]=='warp':
                 tp=TP(i,j,tp_pos,tp_max)
+                continue
+            if MAP[i][j]=='hhh':
+                hhh=Entity(
+                    model='cube',
+                    color=color.black90,
+                    position=(i*5,-1,j*5),
+                    scale=(5,25,5)
+                )
                 continue
             wall=Entity(
                 model='cube',
                 color=color.black,
                 position=(i*5,-1,j*5),
                 scale=(5,25,5),
-                collider='box',
+                collider='box'
             )
             
 plane=Entity(
