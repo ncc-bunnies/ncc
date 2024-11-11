@@ -19,7 +19,7 @@ P='player' #Player
 E='exit' #Exit
 T='warp' #warp
 
-tp_pos=(75,0,10)
+tp_pos=[(75,0,10)]
 tp_max=1
 
 class Player(FirstPersonController):
@@ -55,8 +55,8 @@ class TP(Entity):
     def warp(self):
         global tp_max
         if self.intersects(self.player):
-            self.player.position=self.tp_pos
             tp_max-=1
+            self.player.position=self.tp_pos[tp_max]
     
     def update(self):
         self.warp()
@@ -82,11 +82,12 @@ class Exit(Entity):
 
     def sound(self):
         dis=(self.player.position-self.position).length()
-        a=Audio(
-            'kkk',
-            volume=256/(dis**2),
-            loop=True
-        )
+        if tp_max==0:
+            a=Audio(
+                'kkk',
+                volume=256/(dis**2),
+                loop=True
+            )
     
     def clear(self):
         if self.intersects(self.player):
@@ -145,7 +146,7 @@ for i in range(len(MAP)):
                 exit=Exit(i,j)
                 continue
             if MAP[i][j]=="warp":
-                tp=TP(i,j,tp_pos)
+                tp=TP(i,j,tp_pos,tp_max)
                 continue
             wall=Entity(
                 model='cube',
