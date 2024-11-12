@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-#from ursina.shaders.screenspace_shaders.fxaa import *
+# from ursina.shaders.screenspace_shaders.fxaa import *
 import os
 
 os.system('cls')
@@ -13,14 +13,14 @@ app=Ursina(
     size=(1000,750)
 )
 
-#camera.shader=fxaa_shader
+# camera.shader=fxaa_shader
 
-W=True #Wall
-_=False #None
-P='player' #Player
-E='exit' #Exit
-T='warp' #warp
-H='hhh' #뭘보냐?
+W=True # Wall
+_=False # None
+P='player' # Player
+E='exit' # Exit
+T='warp' # warp
+H='hhh' # 뭘보냐?
 
 tp_pos=[(150,0,5),(75,0,10)]
 tp_max=2
@@ -54,15 +54,12 @@ class TP(Entity):
     
         self.player=player
         self.tp_pos=tp_pos
-
-    def warp(self):
+    
+    def update(self):
         global tp_max
         if self.intersects(self.player):
             tp_max-=1
             self.player.position=self.tp_pos[tp_max]
-    
-    def update(self):
-        self.warp()
 
 class Exit(Entity):
     def __init__(self,i,j):
@@ -107,7 +104,26 @@ def input(key):
     if key=='f11':
         window.fullscreen=not window.fullscreen
 
-#EditorCamera()
+class Coin(Entity):
+    def __init__(self,i,j):
+        super().__init__(
+            model='circle',
+            color=color.red,
+            position=(i*5,-1,j*5),
+            scale=1,
+            collider='box',
+            double_sided=True
+        )
+
+        self.player=player
+
+    def update(self):
+        self.rotation_y+=9
+        self.color=color.random_color()
+        if self.intersects(self.player):
+            destroy(self)
+
+# EditorCamera()
 
 MAP=[
     [W,W,W],
@@ -196,24 +212,30 @@ for i in range(len(MAP)):
                 scale=(5,25,5),
                 collider='box'
             )
-            
+        else:
+            coin=Coin(i,j)
+
 plane=Entity(
     model='Plane',
     color=color.dark_gray,
-    scale=(50000,1,500),
+    scale=(50000,1,50000),
     position=(0,-2,0),
     collider='mesh',
-    #texture=''
 )
 
 ceiling=Entity(
     model='Plane',
     color=color.black,
-    scale=(50000,1,500),
+    scale=(50000,1,50000),
     position=(0,25,0),
     collider='mesh',
     rotation=(0,0,180)
 )
+
+sky=Sky(
+    color=color.red,
+    texture='noise'
+    )
 
 pos_print=Text(
     origin=(0,0)
@@ -223,5 +245,6 @@ def update():
     global ppos
     ppos=[int(oo) for oo in (player.position.x,player.position.y,player.position.z)]
     pos_print.text=ppos
+
 
 app.run()
