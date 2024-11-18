@@ -91,7 +91,7 @@ class Exit(Entity):
     
     def clear(self):
         if self.intersects(self.player):
-            self.player.enabled=False
+            destroy(self.player)
             self.text.visible=True
         
     def update(self):
@@ -122,6 +122,28 @@ class Coin(Entity):
         self.color=color.random_color()
         if self.intersects(self.player):
             destroy(self)
+
+plane=Entity(
+    model='Plane',
+    color=color.dark_gray,
+    scale=(50000,1,50000),
+    position=(0,0,0),
+    collider='mesh',
+)
+
+ceiling=Entity(
+    model='Plane',
+    color=color.black,
+    scale=(50000,1,50000),
+    position=(0,25,0),
+    collider='mesh',
+    rotation=(0,0,180)
+)
+
+Sky(
+    color=color.red,
+    texture='noise'
+    )
 
 # EditorCamera()
 
@@ -161,7 +183,7 @@ MAP=[
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
-    [_,_,_,_,_,_,_,_,_,W,_,W],
+    [_,_,_,_,T,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
     [_,_,_,_,_,_,_,_,_,W,_,W],
@@ -211,28 +233,6 @@ for i in range(len(MAP)):
                 )
             # case False:
             #     coin=Coin(i,j)
-
-plane=Entity(
-    model='Plane',
-    color=color.dark_gray,
-    scale=(50000,1,50000),
-    position=(0,0,0),
-    collider='mesh',
-)
-
-ceiling=Entity(
-    model='Plane',
-    color=color.black,
-    scale=(50000,1,50000),
-    position=(0,25,0),
-    collider='mesh',
-    rotation=(0,0,180)
-)
-
-Sky(
-    color=color.red,
-    texture='noise'
-    )
 
 pos_print=Text(
     origin=(0,0)
