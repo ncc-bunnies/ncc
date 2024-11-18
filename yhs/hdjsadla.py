@@ -209,14 +209,14 @@ for i in range(len(MAP)):
                     scale=(5,25,5),
                     collider='box'
                 )
-            case False:
-                coin=Coin(i,j)
+            # case False:
+            #     coin=Coin(i,j)
 
 plane=Entity(
     model='Plane',
     color=color.dark_gray,
     scale=(50000,1,50000),
-    position=(0,-2,0),
+    position=(0,0,0),
     collider='mesh',
 )
 
@@ -229,7 +229,7 @@ ceiling=Entity(
     rotation=(0,0,180)
 )
 
-sky=Sky(
+Sky(
     color=color.red,
     texture='noise'
     )
