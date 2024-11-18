@@ -187,33 +187,30 @@ MAP=[
 
 for i in range(len(MAP)):
     for j in range(len(MAP[i])):
-        if MAP[i][j]:
-            if MAP[i][j]=='player':
+        match MAP[i][j]:
+            case 'player':
                 player=Player(i,j)
-                continue
-            if MAP[i][j]=='exit':
+            case 'exit':
                 exit=Exit(i,j)
-                continue
-            if MAP[i][j]=='warp':
+            case 'warp':
                 tp=TP(i,j,tp_pos,tp_max)
-                continue
-            if MAP[i][j]=='hhh':
+            case 'hhh':
                 hhh=Entity(
                     model='cube',
                     color=color.black90,
                     position=(i*5,-1,j*5),
                     scale=(5,25,5)
                 )
-                continue
-            wall=Entity(
-                model='cube',
-                color=color.black,
-                position=(i*5,-1,j*5),
-                scale=(5,25,5),
-                collider='box'
-            )
-        else:
-            coin=Coin(i,j)
+            case True:
+                wall=Entity(
+                    model='cube',
+                    color=color.black,
+                    position=(i*5,-1,j*5),
+                    scale=(5,25,5),
+                    collider='box'
+                )
+            case False:
+                coin=Coin(i,j)
 
 plane=Entity(
     model='Plane',
